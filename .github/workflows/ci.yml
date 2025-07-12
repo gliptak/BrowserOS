@@ -15,7 +15,7 @@ jobs:
     - run: |
          echo $PATH
          echo $HOME
-         export PATH="${HOME}/BrowserOS/build/depot_tools:$PATH"
+         export PATH="${HOME}/work/BrowserOS/BrowserOS/build//depot_tools:$PATH"
          cd build
          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
          mkdir chromium_src && cd chromium_src

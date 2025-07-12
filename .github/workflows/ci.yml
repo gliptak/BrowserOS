@@ -16,7 +16,7 @@ jobs:
          export PATH="${HOME}/work/BrowserOS/BrowserOS/build/depot_tools:$PATH"
          cd build
          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-         ../depot_tools/fetch --nohooks --no-history chromium
+         fetch --nohooks --no-history chromium
     - run: |
          find build/
          ./build/build.py --config build/config/debug.yaml --chromium-src build/src/

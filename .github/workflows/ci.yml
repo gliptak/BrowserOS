@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
-        ./build/build.py --config build/config/debug.yaml
+        ./build/build.py --config build/config/debug.yaml --chromium-src chromium-src/

@@ -8,12 +8,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Free disk space
       run: |
-        cat /etc/*release*
+        set -x
         df -k
         apt list --installed
         sudo apt-get remove temurin-11-jdk temurin-17-jdk temurin-21-jdk temurin-8-jdk -yq \

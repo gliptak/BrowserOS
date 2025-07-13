@@ -22,8 +22,9 @@ jobs:
           -yq
         sudo apt-get autoremove -y >/dev/null 2>&1
         sudo apt-get autoclean -y >/dev/null 2>&1
+        apt list --installed
         sudo rm -rf /usr/local/lib/android >/dev/null 2>&1
-        docker rmi $(docker image ls -aq) >/dev/null 2>&1
+        docker rmi $(docker image ls -aq) >/dev/null 2>&1 || true
         df -k
     - uses: actions/checkout@v4
     - name: Checkout Chromium

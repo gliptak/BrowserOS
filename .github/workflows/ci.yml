@@ -37,7 +37,8 @@ jobs:
     - name: Checkout Chromium
       run: |
          export PATH="${HOME}/work/BrowserOS/BrowserOS/build/depot_tools:$PATH"
-         cd ${HOME}/work/BrowserOS/BrowserOS/build
+         mkdir build
+         cd build
          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
          fetch --nohooks --no-history chromium
          sudo mv src /

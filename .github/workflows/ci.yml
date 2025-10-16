@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Free disk space
+      run: |
+        set -x
+        df -k    
+    - uses: jlumbroso/free-disk-space@main
+    - name: Free disk space
+      run: |
+        set -x
+        df -k
+        apt list --installed
+        sudo apt-get remove temurin-11-jdk temurin-17-jdk temurin-21-jdk temurin-8-jdk -yq \
+          php8.3 ruby \
+          llvm-16 llvm-17 llvm-18 \
+          -yq
+        sudo apt-get autoremove -y >/dev/null 2>&1
+        sudo apt-get autoclean -y >/dev/null 2>&1
+        apt list --installed
+        sudo rm -rf /usr/local/lib/android >/dev/null 2>&1
+        docker rmi $(docker image ls -aq) >/dev/null 2>&1 || true
+        sudo swapoff -a
+        sudo rm -f /swapfile
+        df -k
+    - uses: actions/checkout@v4
+    - name: Checkout Chromium
+      run: |
+         export PATH="${HOME}/work/BrowserOS/BrowserOS/build/depot_tools:$PATH"
+         mkdir build
+         cd build
+         git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+         fetch --nohooks --no-history chromium
+         sudo mv src /
+         ls -l /
+         ls -l /src
+         ln -s /src
+         df -k
+    - name: Build
+      run: |
+         ./build/build.py --config build/config/debug.yaml --chromium-src build/src/
